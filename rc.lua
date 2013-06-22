@@ -41,9 +41,9 @@ end
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/home/matt/.config/awesome/themes/matt/theme.lua")
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
+terminal = "urxvt --meta8 -e bash -c \"tmux -q has-session && exec tmux attach || exec tmux new-session -n$USER -s$USER@$HOSTNAME\""
 editor = os.getenv("EDITOR") or "vim"
-editor_cmd = terminal .. editor
+editor_cmd = terminal .. "-e" .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -77,6 +77,7 @@ if beautiful.wallpaper then
     end
 end
 awful.util.spawn_with_shell("nitrogen --restore")
+awful.util.spawn_with_shell("wicd-client --tray")
 -- }}}
 
 -- {{{ Tags
@@ -224,7 +225,7 @@ root.buttons(awful.util.table.join(
     awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
-
+local termscreen
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
@@ -258,7 +259,10 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "Return",
+        function ()
+            
+        end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -284,7 +288,11 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey }, "p", function() menubar.show() end),
+
+    --Custom Bindings
+    awful.key({ modkey }, "b", function() awful.util.spawn("firefox")   end),
+    awful.key({ modkey }, "Return", function() awful.util.spawn(terminal)   end)
 )
 
 clientkeys = awful.util.table.join(
