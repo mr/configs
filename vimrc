@@ -55,6 +55,10 @@ nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 nmap <silent> <c-n> :NERDTreeToggle<CR>
 nmap <silent> <leader>mk :call TogglePyclewnKeys()<CR>
+nmap <silent> <leader>< 10<c-w><
+nmap <silent> <leader>> 10<c-w>>
+nmap <silent> <leader>+ 10<c-w>+
+nmap <silent> <leader>- 10<c-w>-
 
 syntax on
 call pathogen#infect()
