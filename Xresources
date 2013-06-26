@@ -1,0 +1,79 @@
+URxvt.scrollBar: false
+URxvt.perl-ext-common: default,matcher,copy-paste
+URxvt.urlLauncher:      /usr/bin/firefox
+URxvt.matcher.button:   1
+URxvt.keysym.F11: perl:fullscreen:switch
+URxvt.tabbed.tabbar-fg: -2
+URxvt.tabbed.tabbar-bg: -1
+URxvt.tabbed.tab-fg:    -2
+URxvt.tabbed.tab-bg:    4
+URxvt.font: xft:cure:size=8
+URxvt.boldFont: xft:cure:size=8
+URxvt.keysym.C-semicolon : \033[50
+
+! --- ~/.Xresources ------------------------------------------------------------
+! ------------------------------------------------------------------------------
+! --- generated with 4bit Terminal Color Scheme Designer -----------------------
+! ------------------------------------------------------------------------------
+! --- http://ciembor.github.com/4bit -------------------------------------------
+! ------------------------------------------------------------------------------
+
+! --- special colors ---
+
+*background: #232730
+*foreground: #b4b4b4
+
+! --- standard colors ---
+
+! black
+*color0: #232730
+
+! bright_black
+*color8: #474747
+
+! red
+*color1: #a35b66
+
+! bright_red
+*color9: #ab6b74
+
+! green
+*color2: #99ab6f
+
+! bright_green
+*color10: #acb792
+
+! yellow
+*color3: #ca9733
+
+! bright_yellow
+*color11: #ccaa69
+
+! blue
+*color4: #495d6e
+
+! bright_blue
+*color12: #687987
+
+! magenta
+*color5: #825969
+
+! bright_magenta
+*color13: #977381
+
+! cyan
+*color6: #839191
+
+! bright_cyan
+*color14: #98A4A4
+
+! white
+*color7: #9e8a8e
+
+! bright_white
+*color15: #b4b4b4
+
+
+! ------------------------------------------------------------------------------
+! --- end of terminal colors section -------------------------------------------
+! ------------------------------------------------------------------------------
