@@ -119,8 +119,25 @@ vicious.register(mpdwidget, vicious.widgets.mpd,
             return args["{Artist}"] .. ' - ' .. args["{Title}"]
         end
     end, 10)
+volumewidget = wibox.widget.textbox()
+volumewidget:buttons(awful.util.table.join(
+    awful.button({}, 4,
+        function ()
+            awful.util.spawn("amixer set Master 5%+")
+        end),
+    awful.button({}, 5,
+        function ()
+            awful.util.spawn("amixer set Master 5%-")
+        end)
+))
+vicious.register(volumewidget, vicious.widgets.volume,
+    function (widget, args)
+        return args[1]
+    end, 1, "Master")
 separator = wibox.widget.textbox()
 separator:set_text(" :: ")
+volumetext = wibox.widget.textbox()
+volumetext:set_text("Volume: ")
 -- {{{ Wibox
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
@@ -202,6 +219,9 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(separator)
+    right_layout:add(volumetext)
+    right_layout:add(volumewidget)
     right_layout:add(separator)
     right_layout:add(mpdwidget)
     right_layout:add(separator)
