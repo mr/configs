@@ -11,6 +11,9 @@ URxvt.font: xft:cure:size=8
 URxvt.boldFont: xft:cure:size=8
 URxvt.keysym.C-semicolon : \033[50
 
+xterm*font: cure:size=8:antialias=false
+XTerm*allowBoldFonts: false
+
 ! --- ~/.Xresources ------------------------------------------------------------
 ! ------------------------------------------------------------------------------
 ! --- generated with 4bit Terminal Color Scheme Designer -----------------------
@@ -20,58 +23,58 @@ URxvt.keysym.C-semicolon : \033[50
 
 ! --- special colors ---
 
-*background: #232730
-*foreground: #b4b4b4
+*background: #181818
+*foreground: #b2b2b2
 
 ! --- standard colors ---
 
 ! black
-*color0: #232730
+*color0: #181818
 
 ! bright_black
-*color8: #474747
+*color8: #181818
 
 ! red
-*color1: #a35b66
+*color1: #4f4e70
 
 ! bright_red
-*color9: #ab6b74
+*color9: #797295
 
 ! green
-*color2: #99ab6f
+*color2: #405c70
 
 ! bright_green
-*color10: #acb792
+*color10: #658795
 
 ! yellow
-*color3: #ca9733
+*color3: #4f5c70
 
 ! bright_yellow
-*color11: #ccaa69
+*color11: #798795
 
 ! blue
-*color4: #495d6e
+*color4: #404e7f
 
 ! bright_blue
-*color12: #687987
+*color12: #6572a9
 
 ! magenta
-*color5: #825969
+*color5: #4f4e7f
 
 ! bright_magenta
-*color13: #977381
+*color13: #7972a9
 
 ! cyan
-*color6: #839191
+*color6: #405c7f
 
 ! bright_cyan
-*color14: #98A4A4
+*color14: #6587a9
 
 ! white
-*color7: #9e8a8e
+*color7: #b2b2b2
 
 ! bright_white
-*color15: #b4b4b4
+*color15: #c8c8c8
 
 
 ! ------------------------------------------------------------------------------

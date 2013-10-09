@@ -312,7 +312,8 @@ globalkeys = awful.util.table.join(
 
     --Custom Bindings
     awful.key({ modkey }, "b", function() awful.util.spawn("firefox")   end),
-    awful.key({ modkey }, "Return", function() awful.util.spawn(terminal)   end)
+    awful.key({ modkey }, "Return", function() awful.util.spawn(terminal)   end),
+    awful.key({ modkey, "Shift" }, "m", function() awful.util.spawn("urxvt -e ncmpcpp") end)
 )
 
 clientkeys = awful.util.table.join(
