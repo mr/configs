@@ -7,7 +7,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
 Bundle 'Valloric/YouCompleteMe'
-let g:session_autoload = 'no'
+
 set mouse+=a
 set ttymouse=xterm2
 set number
@@ -49,10 +49,6 @@ function! DoWindowSwap()
     exe 'hide buf' markedBuf 
 endfunction
 
-function! DebugC()
-    :!make debug
-endfunction
-
 let g:pyclewn_keys_on = 0
 function! TogglePyclewnKeys()
     if g:pyclewn_keys_on
@@ -64,13 +60,15 @@ function! TogglePyclewnKeys()
     endif
 endfunction
 
-"function! SaveSession()
-"    if !isdirectory(".git")
-"        :mksession! .git/vim-session.vpj
-"    endif
-"endfunction
-
 map <Esc>[50 <c-;>
+function! ColorColumnToggle()
+    if &colorcolumn
+        :set colorcolumn=
+    else
+        :set colorcolumn=80
+    endif
+endfunction
+
 map! <Esc>[50 <c-;>
 nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nmap <silent> <leader>pw :call DoWindowSwap()<CR>
@@ -85,13 +83,10 @@ nmap <silent> <leader>< 10<c-w><
 nmap <silent> <leader>> 10<c-w>>
 nmap <silent> <leader>+ 10<c-w>+
 nmap <silent> <leader>- 10<c-w>-
+nmap <silent> <leader>c :call ColorColumnToggle()<CR>
 nmap <silent> <Esc> :let @/=''<CR>
 inoremap <F13> <Esc>
 inoremap <esc> <nop>
 "nmap <silent> <leader>s :call SaveSession()<CR>
 
 syntax on
-
-"if filereadable(".git/vim-session.vpj")
-"    :source .git/vim-seesion.vpj
-"endif
