@@ -18,6 +18,8 @@ set shiftwidth=4
 set expandtab
 set hlsearch
 set completeopt-=preview
+let mapleader = ","
+set <F13>=[25~
 inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap {{     {
@@ -84,6 +86,8 @@ nmap <silent> <leader>> 10<c-w>>
 nmap <silent> <leader>+ 10<c-w>+
 nmap <silent> <leader>- 10<c-w>-
 nmap <silent> <Esc> :let @/=''<CR>
+inoremap <F13> <Esc>
+inoremap <esc> <nop>
 "nmap <silent> <leader>s :call SaveSession()<CR>
 
 syntax on
