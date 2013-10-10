@@ -20,14 +20,6 @@ set hlsearch
 set completeopt-=preview
 let mapleader = ","
 set <F13>=[25~
-inoremap {      {}<Left>
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap {{     {
-inoremap {}     {}
-inoremap <c-H>  <Left>
-inoremap <c-J>  <Down>
-inoremap <c-K>  <Up>
-inoremap <c-L>  <Right>
 filetype plugin on
 
 function! MarkWindowSwap()
@@ -63,9 +55,9 @@ endfunction
 map <Esc>[50 <c-;>
 function! ColorColumnToggle()
     if &colorcolumn
-        :set colorcolumn=
+        set colorcolumn=
     else
-        :set colorcolumn=80
+        set colorcolumn=80
     endif
 endfunction
 
@@ -84,9 +76,27 @@ nmap <silent> <leader>> 10<c-w>>
 nmap <silent> <leader>+ 10<c-w>+
 nmap <silent> <leader>- 10<c-w>-
 nmap <silent> <leader>c :call ColorColumnToggle()<CR>
-nmap <silent> <Esc> :let @/=''<CR>
+nmap <silent> <F13> :let @/=''<CR>
+
+vnoremap <F13> <Esc>
+
+onoremap <silent> in( :<c-u>normal! f(vi(<cr>
+onoremap <silent> ip( :<c-u>normal! F)vi(<cr>
+onoremap <silent> in" :<c-u>normal! f"vi"<cr>
+onoremap <silent> ip" :<c-u>normal! F"vi"<cr>
+onoremap <silent> in' :<c-u>normal! f'vi'<cr>
+onoremap <silent> ip' :<c-u>normal! F'vi'<cr>
+
 inoremap <F13> <Esc>
 inoremap <esc> <nop>
+inoremap {      {}<Left>
+inoremap {<CR>  {<CR>}<Esc>O
+inoremap {{     {
+inoremap {}     {}
+inoremap <c-H>  <Left>
+inoremap <c-J>  <Down>
+inoremap <c-K>  <Up>
+inoremap <c-L>  <Right>
 "nmap <silent> <leader>s :call SaveSession()<CR>
 
 syntax on
