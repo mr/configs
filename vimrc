@@ -44,10 +44,10 @@ endfunction
 let g:pyclewn_keys_on = 0
 function! TogglePyclewnKeys()
     if g:pyclewn_keys_on
-        :Cunmapkeys
+        Cunmapkeys
         let g:pyclewn_keys_on = 0
     else
-        :Cmapkeys
+        Cmapkeys
         let g:pyclewn_keys_on = 1
     endif
 endfunction
@@ -55,28 +55,28 @@ endfunction
 map <Esc>[50 <c-;>
 function! ColorColumnToggle()
     if &colorcolumn
-        set colorcolumn=
+        setlocal colorcolumn=
     else
-        set colorcolumn=80
+        setlocal colorcolumn=80
     endif
 endfunction
 
 map! <Esc>[50 <c-;>
-nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
-nmap <silent> <leader>pw :call DoWindowSwap()<CR>
-nmap <silent> <c-h> :wincmd h<CR>
-nmap <silent> <c-j> :wincmd j<CR>
-nmap <silent> <c-k> :wincmd k<CR>
-nmap <silent> <c-l> :wincmd l<CR>
-nmap <silent> <c-n> :NERDTreeToggle<CR>
-nmap <silent> <c-m> :TagbarToggle<CR>
-nmap <silent> <leader>mk :call TogglePyclewnKeys()<CR>
-nmap <silent> <leader>< 10<c-w><
-nmap <silent> <leader>> 10<c-w>>
-nmap <silent> <leader>+ 10<c-w>+
-nmap <silent> <leader>- 10<c-w>-
-nmap <silent> <leader>c :call ColorColumnToggle()<CR>
-nmap <silent> <F13> :let @/=''<CR>
+noremap <silent> <leader>mw :call MarkWindowSwap()<CR>
+noremap <silent> <leader>pw :call DoWindowSwap()<CR>
+noremap <silent> <c-h> :wincmd h<CR>
+noremap <silent> <c-j> :wincmd j<CR>
+noremap <silent> <c-k> :wincmd k<CR>
+noremap <silent> <c-l> :wincmd l<CR>
+noremap <silent> <c-n> :NERDTreeToggle<CR>
+noremap <silent> <c-m> :TagbarToggle<CR>
+noremap <silent> <leader>mk :call TogglePyclewnKeys()<CR>
+noremap <silent> <leader>< 10<c-w><
+noremap <silent> <leader>> 10<c-w>>
+noremap <silent> <leader>+ 10<c-w>+
+noremap <silent> <leader>- 10<c-w>-
+noremap <silent> <leader>c :call ColorColumnToggle()<CR>
+noremap <silent> <F13> :let @/=''<CR>
 
 vnoremap <F13> <Esc>
 
@@ -97,6 +97,7 @@ inoremap <c-H>  <Left>
 inoremap <c-J>  <Down>
 inoremap <c-K>  <Up>
 inoremap <c-L>  <Right>
-"nmap <silent> <leader>s :call SaveSession()<CR>
+
+cnoremap <F13> <Esc>
 
 syntax on
