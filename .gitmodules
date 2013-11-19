@@ -1,0 +1,3 @@
+[submodule "ltd"]
+	path = ltd
+	url = http://github.com/jmatth/LinkTheDots.git
