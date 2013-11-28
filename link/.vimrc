@@ -1,4 +1,12 @@
 set nocompatible
+let s:vundle_init=0
+let s:vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(s:vundle_readme)
+    echo "Installing Vundle..\n"
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone git://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    let s:vundle_init=1
+endif
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
@@ -88,7 +96,6 @@ onoremap <silent> in' :<c-u>normal! f'vi'<cr>
 onoremap <silent> ip' :<c-u>normal! F'vi'<cr>
 
 inoremap <F13> <Esc>
-inoremap <esc> <nop>
 inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap {{     {
