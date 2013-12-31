@@ -41,7 +41,8 @@ end
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/home/matt/.config/awesome/themes/matt/theme.lua")
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvt --meta8 -e bash -c \"tmux -q has-session && exec tmux attach || exec tmux new-session -n$USER -s$USER@$HOSTNAME\""
+terminal = "urxvt --meta8 -e bash -c \"tmux -q has-session && exec tmux attach || exec tmux new-session -n$USER -swork\""
+new_terminal = "urxvt --meta8 -e bash -c \"exec tmux new-session\""
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. "-e" .. editor
 
@@ -313,6 +314,7 @@ globalkeys = awful.util.table.join(
     --Custom Bindings
     awful.key({ modkey }, "b", function() awful.util.spawn("firefox")   end),
     awful.key({ modkey }, "Return", function() awful.util.spawn(terminal)   end),
+    awful.key({ modkey, "Shift" }, "Return", function() awful.util.spawn(new_terminal)   end),
     awful.key({ modkey, "Shift" }, "m", function() awful.util.spawn("urxvt -e ncmpcpp") end)
 )
 

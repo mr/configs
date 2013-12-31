@@ -3,10 +3,13 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'szw/vim-tags'
-Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'tpope/vim-vinegar'
+Bundle 'Shougo/unite.vim'
+
+Bundle 'ksuarz/vdb'
 
 set mouse+=a
 set ttymouse=xterm2
@@ -68,7 +71,6 @@ noremap <silent> <c-h> :wincmd h<CR>
 noremap <silent> <c-j> :wincmd j<CR>
 noremap <silent> <c-k> :wincmd k<CR>
 noremap <silent> <c-l> :wincmd l<CR>
-noremap <silent> <c-n> :NERDTreeToggle<CR>
 noremap <silent> <c-m> :TagbarToggle<CR>
 noremap <silent> <leader>mk :call TogglePyclewnKeys()<CR>
 noremap <silent> <leader>< 10<c-w><
@@ -76,9 +78,13 @@ noremap <silent> <leader>> 10<c-w>>
 noremap <silent> <leader>+ 10<c-w>+
 noremap <silent> <leader>- 10<c-w>-
 noremap <silent> <leader>c :call ColorColumnToggle()<CR>
-noremap <silent> <F13> :let @/=''<CR>
-
-vnoremap <F13> <Esc>
+noremap <silent> <leader>u :Unite file buffer<CR>
+noremap <silent> <leader>uv <c-w>v<c-w>l:Unite file buffer<CR>
+noremap <silent> <leader>us <c-w>s<c-w>j:Unite file buffer<CR>
+noremap <silent> <leader>e :Unite file buffer<CR>
+noremap <silent> <leader>ev <c-w>v<c-w>l:Ex<CR>
+noremap <silent> <leader>es <c-w>s<c-w>j:Ex<CR>
+noremap <silent> <Esc> :let @/=''<CR>
 
 onoremap <silent> in( :<c-u>normal! f(vi(<cr>
 onoremap <silent> ip( :<c-u>normal! F)vi(<cr>
@@ -87,8 +93,6 @@ onoremap <silent> ip" :<c-u>normal! F"vi"<cr>
 onoremap <silent> in' :<c-u>normal! f'vi'<cr>
 onoremap <silent> ip' :<c-u>normal! F'vi'<cr>
 
-inoremap <F13> <Esc>
-inoremap <esc> <nop>
 inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap {{     {
@@ -98,6 +102,5 @@ inoremap <c-J>  <Down>
 inoremap <c-K>  <Up>
 inoremap <c-L>  <Right>
 
-cnoremap <F13> <Esc>
-
 syntax on
+highlight PmenuSel ctermbg=LightGray
