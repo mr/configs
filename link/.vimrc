@@ -89,7 +89,7 @@ noremap <silent> <leader>c :call ColorColumnToggle()<CR>
 noremap <silent> <leader>u :Unite file buffer<CR>
 noremap <silent> <leader>uv <c-w>v<c-w>l:Unite file buffer<CR>
 noremap <silent> <leader>us <c-w>s<c-w>j:Unite file buffer<CR>
-noremap <silent> <leader>e :Unite file buffer<CR>
+noremap <silent> <leader>e :Ex<CR>
 noremap <silent> <leader>ev <c-w>v<c-w>l:Ex<CR>
 noremap <silent> <leader>es <c-w>s<c-w>j:Ex<CR>
 noremap <silent> <Esc> :let @/=''<CR>
