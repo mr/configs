@@ -34,7 +34,7 @@ set shiftwidth=4
 set expandtab
 set hlsearch
 set completeopt-=preview
-let mapleader = ","
+let mapleader = " "
 set <F13>=[25~
 filetype plugin on
 
