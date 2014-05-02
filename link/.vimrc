@@ -16,6 +16,11 @@ Bundle 'majutsushi/tagbar'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-vinegar'
 Bundle 'Shougo/unite.vim'
+Bundle 'michaeljsmith/vim-indent-object'
+Bundle 'argtextobj.vim'
+Bundle 'mbbill/undotree'
+Bundle 'bling/vim-airline'
+Bundle 'editorconfig/editorconfig-vim'
 
 Bundle 'ksuarz/vdb'
 
