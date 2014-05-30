@@ -108,7 +108,6 @@ onoremap <silent> ip' :<c-u>normal! F'vi'<cr>
 
 inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
-inoremap {{     {
 inoremap {}     {}
 inoremap <c-H>  <Left>
 inoremap <c-J>  <Down>
