@@ -13,9 +13,10 @@ Bundle 'gmarik/vundle'
 Bundle 'szw/vim-tags'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-vinegar'
 Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/neocomplete.vim'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'argtextobj.vim'
 Bundle 'mbbill/undotree'
@@ -34,6 +35,7 @@ set shiftwidth=4
 set expandtab
 set hlsearch
 set completeopt-=preview
+set backspace=2
 let mapleader = " "
 set <F13>=[25~
 filetype plugin on
@@ -90,7 +92,7 @@ noremap <silent> <leader>< 10<c-w><
 noremap <silent> <leader>> 10<c-w>>
 noremap <silent> <leader>+ 10<c-w>+
 noremap <silent> <leader>- 10<c-w>-
-noremap <silent> <leader>c :call ColorColumnToggle()<CR>
+noremap <expr> <leader>c ColorColumnToggle()
 noremap <silent> <leader>u :Unite file buffer<CR>
 noremap <silent> <leader>uv <c-w>v<c-w>l:Unite file buffer<CR>
 noremap <silent> <leader>us <c-w>s<c-w>j:Unite file buffer<CR>
@@ -109,10 +111,17 @@ onoremap <silent> ip' :<c-u>normal! F'vi'<cr>
 inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap {}     {}
-inoremap <c-H>  <Left>
-inoremap <c-J>  <Down>
-inoremap <c-K>  <Up>
-inoremap <c-L>  <Right>
+"inoremap <c-H>  <Left>
+"inoremap <c-J>  <Down>
+"inoremap <c-K>  <Up>
+"inoremap <c-L>  <Right>
 
 syntax on
 highlight PmenuSel ctermbg=LightGray
+
+"Neocomplete options
+
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+let g:EclimCompletionMethod = 'omnifunc'
