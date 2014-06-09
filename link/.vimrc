@@ -16,6 +16,13 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-abolish'
+NeoBundle 'tpope/vim-repeat'
+"NeoBundle 'xolox/vim-misc'
+"NeoBundle 'xolox/vim-lua-ftplugin' "currently broken for reasons poorly understood
+NeoBundle 'eagletmt/neco-ghc'
 NeoBundle 'szw/vim-tags'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'majutsushi/tagbar'
@@ -55,7 +62,9 @@ set hlsearch
 set completeopt-=preview
 set backspace=2
 set wildmenu
+set laststatus=2
 let mapleader = " "
+"let g:airline_powerline_fonts = 1
 set <F13>=[25~
 
 filetype plugin on
@@ -144,6 +153,25 @@ noremap <silent> <leader>mk :call TogglePyclewnKeys()<CR>
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><s-TAB>  pumvisible() ? "\<C-p>" : "\<s-TAB>"
+"let g:neocomplete#force_overwrite_completefunc = 1
+
+" Neocomplete sources
+if !exists('g:neocomplete#sources#omni#functions')
+    let g:neocomplete#sources#omni#functions = {}
+endif
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+endif
+
+" Lua (I think awesome causes this stuff to crash right now)
+"let g:lua_check_syntax = 0
+"let g:lua_complete_omni = 1
+"let g:lua_complete_dynamic = 0
+"let g:neocomplete#sources#omni#functions.lua = 'xolox#lua#omnifunc'
+"let g:neocomplete#sources#omni#input_patterns.lua = '\w\+[.:]\|require\s*(\?["'']\w*'
+
+" Java
 let g:EclimCompletionMethod = 'omnifunc'
 
 " Unite options

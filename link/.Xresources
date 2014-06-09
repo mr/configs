@@ -8,11 +8,13 @@ URxvt.tabbed.tabbar-fg: -2
 URxvt.tabbed.tabbar-bg: -1
 URxvt.tabbed.tab-fg:    -2
 URxvt.tabbed.tab-bg:    4
-URxvt.font: xft:cure:size=8
-URxvt.boldFont: xft:cure:size=8
+URxvt.font: xft:cure-powerline:size=8
+URxvt.boldFont: xft:cure-powerline:size=8
 URxvt.keysym.C-semicolon : \033[50
 
-xterm*font: xft:cure:size=8
+XTerm*renderFont: true
+XTerm*faceName: cure-powerline
+XTerm*faceSize: 8.6
 XTerm*allowBoldFonts: false
 
 ! --- ~/.Xresources ------------------------------------------------------------
