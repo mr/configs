@@ -25,7 +25,7 @@ NeoBundle 'tpope/vim-repeat'
 NeoBundle 'eagletmt/neco-ghc'
 NeoBundle 'szw/vim-tags'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'majutsushi/tagbar'
+"NeoBundle 'majutsushi/tagbar'
 NeoBundle 'michaeljsmith/vim-indent-object'
 NeoBundle 'argtextobj.vim'
 NeoBundle 'mbbill/undotree'
@@ -163,6 +163,9 @@ endif
 if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
 endif
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
 
 " Lua (I think awesome causes this stuff to crash right now)
 "let g:lua_check_syntax = 0
@@ -173,15 +176,23 @@ endif
 
 " Java
 let g:EclimCompletionMethod = 'omnifunc'
+let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
 
 " Unite options
 let g:unite_source_history_yank_enable = 1
+let g:unite_source_file_rec_max_cache_files = 0
+call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
+            \ 'max_candidates', 0)
 nnoremap <leader>y :Unite history/yank<cr>
 nnoremap <C-p> :Unite file_rec/async<cr>
 nnoremap <leader>v <c-w>v<c-w>l
 nnoremap <leader>s <c-w>s<c-w>j
 nnoremap <leader>/ :Unite grep:.<cr>
 nnoremap <leader>a :Unite -quick-match -auto-preview buffer<cr>
+
+" Neosnippet options
+imap <expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
+smap <expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
 
 " Tagbar options
 noremap <silent> <c-m> :TagbarToggle<CR>
