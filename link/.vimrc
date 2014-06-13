@@ -107,6 +107,9 @@ noremap <silent> <c-j> :wincmd j<CR>
 noremap <silent> <c-k> :wincmd k<CR>
 noremap <silent> <c-l> :wincmd l<CR>
 
+" Maximize pane in new tab (preserves splits)
+nnoremap <silent> <leader>t <c-w>s<c-w>T
+
 " Toggle colored line at column 80
 function! ColorColumnToggle()
     if &colorcolumn
@@ -126,7 +129,7 @@ inoremap {}     {}
 highlight PmenuSel ctermbg=LightGray
 
 " Esc to clear search
-nnoremap <Esc> :let @/=''<CR>
+nnoremap <silent> <Esc> :let @/=''<CR>
 
 " Do stuff inside next/previous text objects
 onoremap <silent> in( :<c-u>normal! f(vi(<cr>
@@ -177,14 +180,20 @@ endif
 " Java
 let g:EclimCompletionMethod = 'omnifunc'
 let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
+let g:EclimLoggingDisabled = 1
+let g:EclimTempFilesEnable = 0
 
 " Unite options
 let g:unite_source_history_yank_enable = 1
-let g:unite_source_file_rec_max_cache_files = 0
-call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
-            \ 'max_candidates', 0)
+"let g:unite_split_rule = 'botright'
+" I don't remember what this does
+"let g:unite_source_file_rec_max_cache_files = 0
+"call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
+"            \ 'max_candidates', 0)
 nnoremap <leader>y :Unite history/yank<cr>
 nnoremap <C-p> :Unite file_rec/async<cr>
+nnoremap <leader>ps :Unite file_rec/async -default-action=split<cr>
+nnoremap <leader>pv :Unite file_rec/async -default-action=vsplit<cr>
 nnoremap <leader>v <c-w>v<c-w>l
 nnoremap <leader>s <c-w>s<c-w>j
 nnoremap <leader>/ :Unite grep:.<cr>
