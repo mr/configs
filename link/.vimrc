@@ -28,6 +28,7 @@ NeoBundle 'argtextobj.vim'
 NeoBundle 'mbbill/undotree'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'editorconfig/editorconfig-vim'
+NeoBundle 'Rip-Rip/clang_complete'
 
 let vimproc_updcmd = has('win64') ?
       \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
@@ -121,7 +122,8 @@ inoremap {}     {}
 highlight PmenuSel ctermbg=LightGray
 
 " Esc to clear search
-nnoremap <silent> <Esc> :let @/=''<CR>
+" for some reason this causes vim to start with 'c' pressed only on laptop
+"nnoremap <silent> <Esc> :let @/=''<CR>
 
 " Do stuff inside next/previous text objects
 onoremap <silent> in( :<c-u>normal! f(vi(<cr>
@@ -147,6 +149,7 @@ noremap <silent> <leader>mk :call TogglePyclewnKeys()<CR>
 " Neocomplete options
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#force_overwrite_completefunc = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-TAB>  pumvisible() ? "\<C-p>" : "\<s-TAB>"
 
@@ -166,6 +169,19 @@ let g:EclimCompletionMethod = 'omnifunc'
 let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
 let g:EclimLoggingDisabled = 1
 let g:EclimTempFilesEnable = 0
+
+" C++
+let g:neocomplete#force_omni_input_patterns.c =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.cpp =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:neocomplete#force_omni_input_patterns.objc =
+      \ '\[\h\w*\s\h\?\|\h\w*\%(\.\|->\)'
+let g:neocomplete#force_omni_input_patterns.objcpp =
+      \ '\[\h\w*\s\h\?\|\h\w*\%(\.\|->\)\|\h\w*::\w*'
+let g:clang_complete_auto = 0
+let g:clang_auto_select = 0
+"let g:clang_use_library = 1
 
 " Unite options
 let g:unite_source_history_yank_enable = 1
