@@ -13,6 +13,7 @@ set runtimepath+=~/.vim/bundle/neobundle.vim/
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
@@ -61,9 +62,12 @@ set completeopt-=preview
 set backspace=2
 set wildmenu
 set laststatus=2
+set smartcase
+set ignorecase
+set previewheight=30
 let mapleader = " "
 
-filetype plugin on
+filetype plugin indent on
 syntax on
 
 " Swap panes
@@ -101,7 +105,7 @@ noremap <silent> <c-k> :wincmd k<CR>
 noremap <silent> <c-l> :wincmd l<CR>
 
 " Maximize pane in new tab (preserves splits)
-nnoremap <silent> <leader>t <c-w>s<c-w>T
+nnoremap <silent> <leader>f <c-w>s<c-w>T
 
 " Toggle colored line at column 80
 function! ColorColumnToggle()
@@ -166,9 +170,11 @@ endif
 
 " Java
 let g:EclimCompletionMethod = 'omnifunc'
-let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
+let g:neocomplete#force_omni_input_patterns.java =
+	\ '\%(\h\w*\|)\)\.\w*'
 let g:EclimLoggingDisabled = 1
 let g:EclimTempFilesEnable = 0
+nnoremap <silent> <leader>o :JavaImportOrganize<cr>
 
 " C++
 let g:neocomplete#force_omni_input_patterns.c =
@@ -181,15 +187,28 @@ let g:neocomplete#force_omni_input_patterns.objcpp =
       \ '\[\h\w*\s\h\?\|\h\w*\%(\.\|->\)\|\h\w*::\w*'
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 0
-"let g:clang_use_library = 1
 
 " Unite options
+"
+" This function sets ag's case based on smartcase setting
+" g:unite_source_grep_default_opts must be set again after changing
+" smartcase or ignorecase :(
+function! AgCase()
+    if &g:smartcase && &g:ignorecase
+        return '--smart-case '
+    elseif &g:ignorecase
+        return '--ignore-case '
+    else
+        return ''
+endfunction
+if executable('ag')
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts =
+    \ AgCase() . '--line-numbers --nocolor --nogroup --hidden --ignore ' .
+    \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+    let g:unite_source_grep_recursive_opt = ''
+endif
 let g:unite_source_history_yank_enable = 1
-"let g:unite_split_rule = 'botright'
-" I don't remember what this does
-"let g:unite_source_file_rec_max_cache_files = 0
-"call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
-"            \ 'max_candidates', 0)
 nnoremap <leader>y :Unite history/yank<cr>
 nnoremap <C-p> :Unite file_rec/async<cr>
 nnoremap <leader>ps :Unite file_rec/async -default-action=split<cr>
@@ -197,8 +216,14 @@ nnoremap <leader>pv :Unite file_rec/async -default-action=vsplit<cr>
 nnoremap <leader>v <c-w>v<c-w>l
 nnoremap <leader>s <c-w>s<c-w>j
 nnoremap <leader>/ :Unite grep:.<cr>
-nnoremap <leader>a :Unite -quick-match -auto-preview buffer<cr>
+nnoremap <leader>a :Unite buffer<cr>
+nnoremap <leader>t :Unite tag<cr>
 
 " Neosnippet options
 imap <expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
 smap <expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
+
+" Fugitive settings
+nnoremap <silent> <leader>gs :Gstatus<cr>
+nnoremap <silent> <leader>gc :Gcommit<cr>
+nnoremap <silent> <leader>gd :Gdiff<cr>
