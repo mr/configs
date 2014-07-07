@@ -209,6 +209,9 @@ if executable('ag')
     let g:unite_source_grep_recursive_opt = ''
 endif
 let g:unite_source_history_yank_enable = 1
+function! UniteCword(source)
+    execute "normal! :Unite " . a:source . " -input=" . expand("<cword>") . "\<cr>"
+endfunction
 nnoremap <leader>y :Unite history/yank<cr>
 nnoremap <C-p> :Unite file_rec/async<cr>
 nnoremap <leader>ps :Unite file_rec/async -default-action=split<cr>
@@ -218,6 +221,8 @@ nnoremap <leader>s <c-w>s<c-w>j
 nnoremap <leader>/ :Unite grep:.<cr>
 nnoremap <leader>a :Unite buffer<cr>
 nnoremap <leader>t :Unite tag<cr>
+nnoremap <leader>wt :call UniteCword("tag")<cr>
+nnoremap <leader>wf :call UniteCword("file_rec/async")<cr>
 
 " Neosnippet options
 imap <expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
