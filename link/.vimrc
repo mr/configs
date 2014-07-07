@@ -128,6 +128,7 @@ highlight PmenuSel ctermbg=LightGray
 " Esc to clear search
 " for some reason this causes vim to start with 'c' pressed only on laptop
 "nnoremap <silent> <Esc> :let @/=''<CR>
+nnoremap <leader><leader> :let @/=''<cr>
 
 " Do stuff inside next/previous text objects
 onoremap <silent> in( :<c-u>normal! f(vi(<cr>
