@@ -32,6 +32,7 @@ NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'Rip-Rip/clang_complete'
 NeoBundle 'travitch/hasksyn'
 NeoBundle 'godlygeek/tabular'
+NeoBundle 'Yggdroot/indentLine'
 
 let vimproc_updcmd = has('win64') ?
       \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
@@ -70,6 +71,12 @@ set previewheight=30
 set nofoldenable
 set foldcolumn=1
 let mapleader = " "
+
+" Filetype autocommands
+augroup filetype_xml
+    autocmd!
+    autocmd FileType xml setlocal tabstop=2 softtabstop=2 shiftwidth=2
+augroup END
 
 filetype plugin indent on
 syntax on
@@ -214,6 +221,7 @@ function! AgCase()
         return '--ignore-case '
     else
         return ''
+    endif
 endfunction
 if executable('ag')
     let g:unite_source_grep_command = 'ag'
@@ -226,17 +234,23 @@ let g:unite_source_history_yank_enable = 1
 function! UniteCword(source)
     execute "normal! :Unite " . a:source . " -input=" . expand("<cword>") . "\<cr>"
 endfunction
+function! GoCword()
+    execute "normal! :tag " . expand("<cword>") . "\<cr>"
+endfunction
 nnoremap <leader>y :Unite history/yank<cr>
-nnoremap <C-p> :Unite file_rec/async<cr>
-nnoremap <leader>ps :Unite file_rec/async -default-action=split<cr>
-nnoremap <leader>pv :Unite file_rec/async -default-action=vsplit<cr>
+nnoremap <C-p> :Unite -start-insert file_rec/async<cr>
+nnoremap <leader>ps :Unite -start-insert file_rec/async -default-action=split<cr>
+nnoremap <leader>pv :Unite -start-insert file_rec/async -default-action=vsplit<cr>
 nnoremap <leader>v <c-w>v<c-w>l
 nnoremap <leader>s <c-w>s<c-w>j
 nnoremap <leader>/ :Unite grep:.<cr>
-nnoremap <leader>a :Unite buffer<cr>
+nnoremap <leader>a :Unite -start-insert buffer<cr>
 nnoremap <leader>t :Unite tag<cr>
 nnoremap <leader>wt :call UniteCword("tag")<cr>
 nnoremap <leader>wf :call UniteCword("file_rec/async")<cr>
+nnoremap <silent> gt :call GoCword()<cr>
+nnoremap <silent> gVt <c-w>v<c-w>l:call GoCword()<cr>
+nnoremap <silent> gSt <c-w>s<c-w>j:call GoCword()<cr>
 
 " Neosnippet options
 imap <expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
