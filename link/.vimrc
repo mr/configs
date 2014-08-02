@@ -30,6 +30,8 @@ NeoBundle 'mbbill/undotree'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'Rip-Rip/clang_complete'
+NeoBundle 'travitch/hasksyn'
+NeoBundle 'godlygeek/tabular'
 
 let vimproc_updcmd = has('win64') ?
       \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
@@ -65,10 +67,18 @@ set laststatus=2
 set smartcase
 set ignorecase
 set previewheight=30
+set nofoldenable
+set foldcolumn=1
 let mapleader = " "
 
 filetype plugin indent on
 syntax on
+
+" Get help under word
+function! GetHelp()
+    execute "normal! :h " . expand("<cword>") . "\<cr>"
+endfunction
+nnoremap <leader>h :call GetHelp()<cr>
 
 " Swap panes
 function! MarkWindowSwap()
@@ -189,6 +199,9 @@ let g:neocomplete#force_omni_input_patterns.objcpp =
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 0
 
+" Haskell
+let g:necoghc_enable_detailed_browse = 1
+
 " Unite options
 "
 " This function sets ag's case based on smartcase setting
@@ -233,3 +246,6 @@ smap <expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand
 nnoremap <silent> <leader>gs :Gstatus<cr>
 nnoremap <silent> <leader>gc :Gcommit<cr>
 nnoremap <silent> <leader>gd :Gdiff<cr>
+
+" Tabular settings
+nnoremap <leader>ae :Tabularize /=<cr>
