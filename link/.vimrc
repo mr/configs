@@ -87,6 +87,16 @@ function! GetHelp()
 endfunction
 nnoremap <leader>h :call GetHelp()<cr>
 
+function! ReplaceUnderWord()
+    call inputsave()
+    let l:replace = input('Replacement Text: ')
+    call inputrestore()
+    let l:winview = winsaveview()
+    execute "normal! :%s#" . expand("<cword>") . "#" . l:replace . "#g\<cr>"
+    call winrestview(l:winview)
+endfunction
+nnoremap <leader>r :call ReplaceUnderWord()<cr>
+
 " Swap panes
 function! MarkWindowSwap()
     let g:markedWinNum = winnr()
@@ -229,6 +239,7 @@ if executable('ag')
     \ AgCase() . '--line-numbers --nocolor --nogroup --hidden --ignore ' .
     \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
     let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
 endif
 let g:unite_source_history_yank_enable = 1
 function! UniteCword(source)
