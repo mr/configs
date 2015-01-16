@@ -271,6 +271,7 @@ smap <expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand
 nnoremap <silent> <leader>gs :Gstatus<cr>
 nnoremap <silent> <leader>gc :Gcommit<cr>
 nnoremap <silent> <leader>gd :Gdiff<cr>
+nnoremap <silent> <leader>gp :Git push origin master<cr>
 
 " Tabular settings
 nnoremap <leader>ae :Tabularize /=<cr>
