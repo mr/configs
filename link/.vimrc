@@ -114,7 +114,7 @@ function! DoWindowSwap()
     "Switch to dest and shuffle source->dest
     exe curNum . "wincmd w"
     "Hide and open so that we aren't prompted and keep history
-    exe 'hide buf' markedBuf 
+    exe 'hide buf' markedBuf
 endfunction
 noremap <silent> <leader>mw :call MarkWindowSwap()<CR>
 noremap <silent> <leader>pw :call DoWindowSwap()<CR>
@@ -274,3 +274,6 @@ nnoremap <silent> <leader>gd :Gdiff<cr>
 
 " Tabular settings
 nnoremap <leader>ae :Tabularize /=<cr>
+nnoremap <leader>ac :Tabularize /:<cr>
+nnoremap <leader>at :Tabularize /::<cr>
+nnoremap <leader>aa :Tabularize /-><cr>
