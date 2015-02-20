@@ -33,6 +33,7 @@ NeoBundle 'Rip-Rip/clang_complete'
 NeoBundle 'travitch/hasksyn'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'Yggdroot/indentLine'
+NeoBundle 'bronson/vim-trailing-whitespace'
 
 let vimproc_updcmd = has('win64') ?
       \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
@@ -278,3 +279,9 @@ nnoremap <leader>ae :Tabularize /=<cr>
 nnoremap <leader>ac :Tabularize /:<cr>
 nnoremap <leader>at :Tabularize /::<cr>
 nnoremap <leader>aa :Tabularize /-><cr>
+
+" Syntastic settings
+if isdirectory('venv')
+    let g:syntastic_python_python_exec = 'venv/bin/python'
+endif
+let g:syntastic_python_checkers = ['python', 'flake8', 'pyflakes']
