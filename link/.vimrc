@@ -34,6 +34,9 @@ NeoBundle 'travitch/hasksyn'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'bronson/vim-trailing-whitespace'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'tomasr/molokai'
 
 let vimproc_updcmd = has('win64') ?
       \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
@@ -45,8 +48,6 @@ execute "NeoBundle 'Shougo/vimproc.vim'," . string({
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ })
-
-NeoBundle 'ksuarz/vdb'
 
 call neobundle#end()
 
@@ -71,7 +72,12 @@ set ignorecase
 set previewheight=30
 set nofoldenable
 set foldcolumn=1
+set cursorline
+set relativenumber
 let mapleader = " "
+
+" Colorscheme
+colorscheme monokai
 
 " Filetype autocommands
 augroup filetype_xml
@@ -150,6 +156,22 @@ inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap {}     {}
 
+inoremap (      ()<Left>
+inoremap (<CR>  (<CR>)<Esc>O
+inoremap ()     ()
+
+inoremap <      <><Left>
+inoremap <<CR>  <<CR>><Esc>O
+inoremap <>     <>
+
+inoremap "      ""<Left>
+inoremap "<CR>  "<CR>"<Esc>O
+inoremap ""     ""
+
+inoremap '      ''<Left>
+inoremap '<CR>  '<CR>'<Esc>O
+inoremap ''     ''
+
 " Stop my color scheme from breaking Autocomplete
 highlight PmenuSel ctermbg=LightGray
 
@@ -196,6 +218,13 @@ endif
 if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
 endif
+
+" Python
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configurations = 0
+let g:neocomplete#force_omni_input_patterns.python =
+    \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
 " Java
 let g:EclimCompletionMethod = 'omnifunc'
@@ -285,3 +314,18 @@ if isdirectory('venv')
     let g:syntastic_python_python_exec = 'venv/bin/python'
 endif
 let g:syntastic_python_checkers = ['python', 'flake8', 'pyflakes']
+
+" Airline settings
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'molokai'
+
+" indentLine settings
+" This stuff needs to be darker and work with cursorline
+"let g:indentLine_leadingSpaceChar = '·'
+"let g:indentLine_char = '┊'
+"let g:indentLine_leadingSpaceEnabled = 1
+
+" Fix colorscheme
+hi Normal ctermbg=NONE
+
+nnoremap <leader>x :set cursorcolumn!<cr>
