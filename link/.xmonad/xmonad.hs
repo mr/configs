@@ -1,10 +1,6 @@
--- default desktop configuration for Fedora
-
-import System.Posix.Env (getEnv)
-import Data.Maybe (maybe)
-
 import XMonad
 import XMonad.Util.EZConfig
+import XMonad.Util.Paste
 
 main = xmonad $ defaultConfig {
     terminal = myTerm
@@ -12,4 +8,7 @@ main = xmonad $ defaultConfig {
 
 myTerm = "roxterm"
 
-myKeys = [ ("M-c", kill), ("M-<Return>", spawn myTerm) ]
+myKeys = [ ("M-c", kill)
+         , ("M-<Return>", spawn myTerm)
+         , ("M-v", pasteSelection)
+         ]
