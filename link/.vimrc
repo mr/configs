@@ -14,9 +14,9 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'tsukkee/unite-tag'
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
+"NeoBundle 'Shougo/neocomplete.vim'
+"NeoBundle 'Shougo/neosnippet.vim'
+"NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-abolish'
@@ -37,6 +37,7 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'tomasr/molokai'
+NeoBundle 'keith/tmux.vim'
 
 let vimproc_updcmd = has('win64') ?
       \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
@@ -57,7 +58,7 @@ NeoBundleCheck
 set mouse+=a
 set ttymouse=xterm2
 set number
-set smartindent
+set cindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -151,7 +152,7 @@ function! ColorColumnToggle()
 endfunction
 noremap <expr> <leader>c ColorColumnToggle()
 
-" Autocomplete curly braces
+" Autocomplete various braces
 inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap {}     {}
@@ -188,7 +189,7 @@ onoremap <silent> ip" :<c-u>normal! F"vi"<cr>
 onoremap <silent> in' :<c-u>normal! f'vi'<cr>
 onoremap <silent> ip' :<c-u>normal! F'vi'<cr>
 
-" Pyclewn options (it's not even installed most of the time
+" Pyclewn options (it's not even installed most of the time)
 let g:pyclewn_keys_on = 0
 function! TogglePyclewnKeys()
     if g:pyclewn_keys_on
@@ -294,8 +295,8 @@ nnoremap <silent> gVt <c-w>v<c-w>l:call GoCword()<cr>
 nnoremap <silent> gSt <c-w>s<c-w>j:call GoCword()<cr>
 
 " Neosnippet options
-imap <expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
-smap <expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
+"imap <expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
+"smap <expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
 
 " Fugitive settings
 nnoremap <silent> <leader>gs :Gstatus<cr>

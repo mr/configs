@@ -30,17 +30,19 @@ ZSH_THEME="blinks"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git cabal)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/home/matt/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
+export PATH=$PATH:$HOME/.bin:$HOME/.cabal/bin
 
 eval $(dircolors)
-
 export LS_COLORS=`echo $LS_COLORS|sed 's/34\;42/94/g'`
-alias weechat=weechat-curses
+if [ -f "/usr/java/latest" ]; then
+    export JAVA_HOME="/usr/java/latest"
+fi
+
 bindkey -v
 function zle-line-init zle-keymap-select {
     RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
@@ -51,4 +53,26 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 bindkey "^?" backward-delete-char
 
-export TERM=xterm
+# Most important function
+function ayy_lmao() {
+    echo "░░░░░░▄▀▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒█"
+    echo "░░░░█▒▒▄▀▀▀▀▀▄▄▒▒▒▒▒▒▒▒▒▄▄▀▀▀▀▀▀▄"
+    echo "░░▄▀▒▒▒▄█████▄▒█▒▒▒▒▒▒▒█▒▄█████▄▒█"
+    echo "░█▒▒▒▒▐███████▌▌▒█▒▒▒▒▒█▒▐██████▌▒█"
+    echo "▀▒▒▒▒▒▒▀█████▀▒▒█▒░▄▒▄█▒▒▀█████▀▒▒▒█"
+    echo "▒▒▐▒▒▒░░░░▒▒▒▒▒█▒░▒▒▀▒▒█▒▒▒▒▒▒▒▒▒▒▒▒█"
+    echo "▒▌▒▒▒░░░▒▒▒▒▒▄▀▒░▒▄█▄█▄▒▀▄▒▒▒▒▒▒▒▒▒▒▒▌"
+    echo "▒▌▒▒▒▒░▒▒▒▒▒▒▀▄▒▒█▌▌▌▌▌█▄▀▒▒▒▒▒▒▒▒▒▒▒▐"
+    echo "▒▐▒▒▒▒▒▒▒▒▒▒▒▒▒▌▒▒▀███▀▒▌▒▒▒▒▒▒▒▒▒▒▒▒▌"
+    echo "▀▀▄▒▒▒▒▒▒▒▒▒▒▒▌▒▒▒▒▒▒▒▒▒▐▒▒▒▒▒▒▒▒▒▒▒█"
+    echo "▀▄▒▀▄▒▒▒▒▒▒▒▒▐▒▒▒▒▒▒▒▒▒▄▄▄▄▒▒▒▒▒▒▄▄▀"
+    echo "▒▒▀▄▒▀▄▀▀▀▄▀▀▀▀▄▄▄▄▄▄▄▀░░░░▀▀▀▀▀▀"
+    echo "▒▒▒▒▀▄▐▒▒▒▒▒▒▒▒▒▒▒▒▒▐"
+    echo "░▄▄▄░░▄░░▄░▄░░▄░░▄░░░░▄▄░▄▄░░░▄▄▄░░░▄▄▄"
+    echo "█▄▄▄█░█▄▄█░█▄▄█░░█░░░█░░█░░█░█▄▄▄█░█░░░█"
+    echo "█░░░█░░█░░░░█░░░░█░░░█░░█░░█░█░░░█░█░░░█"
+    echo "▀░░░▀░░▀░░░░▀░░░░▀▀▀░░░░░░░░░▀░░░▀░▀▄▄▄▀"
+}
+
+alias weechat=weechat-curses
+alias tmux="tmux -2"
