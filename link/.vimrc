@@ -30,14 +30,15 @@ NeoBundle 'mbbill/undotree'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'Rip-Rip/clang_complete'
-NeoBundle 'travitch/hasksyn'
+"NeoBundle 'travitch/hasksyn'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'davidhalter/jedi-vim'
-NeoBundle 'tomasr/molokai'
 NeoBundle 'keith/tmux.vim'
+NeoBundle 'sickill/vim-monokai'
+NeoBundle 'dag/vim2hs'
 
 let vimproc_updcmd = has('win64') ?
       \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
@@ -74,7 +75,6 @@ set previewheight=30
 set nofoldenable
 set foldcolumn=1
 set cursorline
-set relativenumber
 let mapleader = " "
 
 " Colorscheme
@@ -84,6 +84,11 @@ colorscheme monokai
 augroup filetype_xml
     autocmd!
     autocmd FileType xml setlocal tabstop=2 softtabstop=2 shiftwidth=2
+augroup END
+
+augroup filetype_haskell
+    autocmd!
+    autocmd FileType haskell setlocal nocursorline
 augroup END
 
 filetype plugin indent on
@@ -249,6 +254,7 @@ let g:clang_auto_select = 0
 
 " Haskell
 let g:necoghc_enable_detailed_browse = 1
+let g:haskell_conceal_wide = 1
 
 " Unite options
 "

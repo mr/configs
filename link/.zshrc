@@ -43,6 +43,8 @@ if [ -f "/usr/java/latest" ]; then
     export JAVA_HOME="/usr/java/latest"
 fi
 
+alias weechat=weechat-curses
+alias tmux="tmux -2"
 bindkey -v
 function zle-line-init zle-keymap-select {
     RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"

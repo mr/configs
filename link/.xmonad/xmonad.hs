@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.Hooks.SetWMName
 import XMonad.Util.EZConfig
 import XMonad.Util.NamedWindows
 import XMonad.Util.Paste
