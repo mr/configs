@@ -78,3 +78,4 @@ function ayy_lmao() {
 
 alias weechat=weechat-curses
 alias tmux="tmux -2"
+alias ghist="git --no-pager log --color=always --oneline | head"
