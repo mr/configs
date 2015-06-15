@@ -4,6 +4,7 @@ import XMonad.Util.EZConfig
 import XMonad.Util.NamedWindows
 import XMonad.Util.Paste
 import XMonad.Util.Run
+import XMonad.Hooks.Script
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
 
@@ -21,8 +22,12 @@ instance UrgencyHook LibNotifyUrgencyHook where
 main = xmonad $ withUrgencyHook LibNotifyUrgencyHook $ defaultConfig {
     terminal    = myTerm,
     modMask     = mod4Mask,
-    startupHook = setWMName "LG3D"
+    startupHook = startupHookFuncs
 } `additionalKeysP` myKeys
+
+startupHookFuncs = do
+        setWMName "LG3D"
+        execScriptHook "startup"
 
 myTerm = "roxterm"
 
