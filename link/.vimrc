@@ -14,9 +14,9 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'tsukkee/unite-tag'
-"NeoBundle 'Shougo/neocomplete.vim'
-"NeoBundle 'Shougo/neosnippet.vim'
-"NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-abolish'
@@ -30,15 +30,16 @@ NeoBundle 'mbbill/undotree'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'Rip-Rip/clang_complete'
-"NeoBundle 'travitch/hasksyn'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'keith/tmux.vim'
-NeoBundle 'sickill/vim-monokai'
-NeoBundle 'dag/vim2hs'
+"NeoBundle 'dag/vim2hs'
+"NeoBundle 'travitch/hasksyn'
+NeoBundle 'raichoo/haskell-vim'
+NeoBundle 'tomasr/molokai'
 
 let vimproc_updcmd = has('win64') ?
       \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
@@ -78,17 +79,13 @@ set cursorline
 let mapleader = " "
 
 " Colorscheme
-colorscheme monokai
+colorscheme molokai
+let g:rehash256 = 1
 
 " Filetype autocommands
 augroup filetype_xml
     autocmd!
     autocmd FileType xml setlocal tabstop=2 softtabstop=2 shiftwidth=2
-augroup END
-
-augroup filetype_haskell
-    autocmd!
-    autocmd FileType haskell setlocal nocursorline
 augroup END
 
 filetype plugin indent on
@@ -254,7 +251,14 @@ let g:clang_auto_select = 0
 
 " Haskell
 let g:necoghc_enable_detailed_browse = 1
-let g:haskell_conceal_wide = 1
+let g:haskell_conceal_enumerations = 0
+
+augroup filetype_haskell
+    autocmd!
+    autocmd FileType haskell setlocal nocursorline
+    autocmd FileType haskell let g:vim_tags_project_tags_command = "hasktags --ignore-close-implementation --ctags ."
+augroup END
+
 
 " Unite options
 "
