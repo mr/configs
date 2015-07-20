@@ -6,7 +6,7 @@ plugins=(git cabal)
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH=$PATH:$HOME/.bin:$HOME/.cabal/bin
+export PATH=$HOME/.bin:$HOME/.cabal/bin:$PATH
 
 eval $(dircolors)
 export LS_COLORS=`echo $LS_COLORS|sed 's/34\;42/94/g'`
@@ -51,3 +51,4 @@ alias weechat=weechat-curses
 alias tmux="tmux -2"
 alias ghist="git --no-pager log --color=always --oneline | head"
 alias ghistg="git --no-pager log --color=always --oneline --graph | head"
+alias bat="watch -n 1 'upower -i /org/freedesktop/UPower/devices/battery_BAT0'"

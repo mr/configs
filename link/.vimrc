@@ -39,7 +39,11 @@ NeoBundle 'keith/tmux.vim'
 "NeoBundle 'dag/vim2hs'
 "NeoBundle 'travitch/hasksyn'
 NeoBundle 'raichoo/haskell-vim'
+NeoBundle 'bitc/vim-hdevtools'
 NeoBundle 'tomasr/molokai'
+NeoBundle 'stephpy/vim-yaml'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'kana/vim-submode'
 
 let vimproc_updcmd = has('win64') ?
       \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
@@ -79,6 +83,7 @@ set cursorline
 let mapleader = " "
 
 " Colorscheme
+let g:solarized_termcolors=256
 colorscheme molokai
 let g:rehash256 = 1
 
@@ -86,6 +91,11 @@ let g:rehash256 = 1
 augroup filetype_xml
     autocmd!
     autocmd FileType xml setlocal tabstop=2 softtabstop=2 shiftwidth=2
+augroup END
+
+augroup filetype_yaml
+    autocmd!
+    autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 
 filetype plugin indent on
@@ -141,6 +151,9 @@ noremap <silent> <c-j> :wincmd j<CR>
 noremap <silent> <c-k> :wincmd k<CR>
 noremap <silent> <c-l> :wincmd l<CR>
 
+nnoremap <silent> <c-Tab> :bnext<CR>
+nnoremap <silent> <c-s-Tab> :bprevious<CR>
+
 " Maximize pane in new tab (preserves splits)
 nnoremap <silent> <leader>f <c-w>s<c-w>T
 
@@ -163,17 +176,12 @@ inoremap (      ()<Left>
 inoremap (<CR>  (<CR>)<Esc>O
 inoremap ()     ()
 
-inoremap <      <><Left>
-inoremap <<CR>  <<CR>><Esc>O
-inoremap <>     <>
+inoremap [      []<Left>
+inoremap [<CR>  [<CR>]<Esc>O
+inoremap []     []
 
 inoremap "      ""<Left>
-inoremap "<CR>  "<CR>"<Esc>O
 inoremap ""     ""
-
-inoremap '      ''<Left>
-inoremap '<CR>  '<CR>'<Esc>O
-inoremap ''     ''
 
 " Stop my color scheme from breaking Autocomplete
 highlight PmenuSel ctermbg=LightGray
@@ -252,13 +260,24 @@ let g:clang_auto_select = 0
 " Haskell
 let g:necoghc_enable_detailed_browse = 1
 let g:haskell_conceal_enumerations = 0
+let g:haskell_indent_if = 4
+let g:haskell_indent_case = 4
+let g:haskell_indent_where = 4
+let g:haskell_indent_do = 4
+let g:haskell_indent_in = 0
 
 augroup filetype_haskell
     autocmd!
     autocmd FileType haskell setlocal nocursorline
     autocmd FileType haskell let g:vim_tags_project_tags_command = "hasktags --ignore-close-implementation --ctags ."
+    autocmd FileType haskell setlocal formatprg=pointfree\ --stdin
 augroup END
 
+set noshowmode
+let g:submode_timeout = 0
+call submode#enter_with('haskell', 'n', '', '<leader>h')
+call submode#map('haskell', 'n', '', 't', ':HdevtoolsType<cr>')
+call submode#map('haskell', 'n', '', 'c', ':HdevtoolsClear<cr>')
 
 " Unite options
 "
@@ -340,3 +359,4 @@ let g:airline_theme = 'molokai'
 hi Normal ctermbg=NONE
 
 nnoremap <leader>x :set cursorcolumn!<cr>
+"set background=light
