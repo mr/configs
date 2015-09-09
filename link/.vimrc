@@ -36,10 +36,10 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'keith/tmux.vim'
-"NeoBundle 'dag/vim2hs'
+NeoBundle 'dag/vim2hs'
+NeoBundle 'eagletmt/ghcmod-vim'
 "NeoBundle 'travitch/hasksyn'
-NeoBundle 'raichoo/haskell-vim'
-NeoBundle 'bitc/vim-hdevtools'
+"NeoBundle 'raichoo/haskell-vim'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'stephpy/vim-yaml'
 NeoBundle 'altercation/vim-colors-solarized'
@@ -106,16 +106,6 @@ function! GetHelp()
     execute "normal! :h " . expand("<cword>") . "\<cr>"
 endfunction
 nnoremap <leader>h :call GetHelp()<cr>
-
-function! ReplaceUnderWord()
-    call inputsave()
-    let l:replace = input('Replacement Text: ')
-    call inputrestore()
-    let l:winview = winsaveview()
-    execute "normal! :%s#" . expand("<cword>") . "#" . l:replace . "#g\<cr>"
-    call winrestview(l:winview)
-endfunction
-nnoremap <leader>r :call ReplaceUnderWord()<cr>
 
 " Swap panes
 function! MarkWindowSwap()
@@ -199,19 +189,6 @@ onoremap <silent> ip" :<c-u>normal! F"vi"<cr>
 onoremap <silent> in' :<c-u>normal! f'vi'<cr>
 onoremap <silent> ip' :<c-u>normal! F'vi'<cr>
 
-" Pyclewn options (it's not even installed most of the time)
-let g:pyclewn_keys_on = 0
-function! TogglePyclewnKeys()
-    if g:pyclewn_keys_on
-        Cunmapkeys
-        let g:pyclewn_keys_on = 0
-    else
-        Cmapkeys
-        let g:pyclewn_keys_on = 1
-    endif
-endfunction
-noremap <silent> <leader>mk :call TogglePyclewnKeys()<CR>
-
 " Neocomplete options
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
@@ -268,7 +245,6 @@ let g:haskell_indent_in = 0
 
 augroup filetype_haskell
     autocmd!
-    autocmd FileType haskell setlocal nocursorline
     autocmd FileType haskell let g:vim_tags_project_tags_command = "hasktags --ignore-close-implementation --ctags ."
     autocmd FileType haskell setlocal formatprg=pointfree\ --stdin
 augroup END
@@ -276,8 +252,9 @@ augroup END
 set noshowmode
 let g:submode_timeout = 0
 call submode#enter_with('haskell', 'n', '', '<leader>h')
-call submode#map('haskell', 'n', '', 't', ':HdevtoolsType<cr>')
-call submode#map('haskell', 'n', '', 'c', ':HdevtoolsClear<cr>')
+call submode#map('haskell', 'n', '', 't', ':GhcModType<cr>')
+call submode#map('haskell', 'n', '', 'c', ':GhcModTypeClear<cr>')
+call submode#map('haskell', 'n', '', 's', ':GhcModCheck<cr>')
 
 " Unite options
 "
@@ -351,9 +328,11 @@ let g:airline_theme = 'molokai'
 
 " indentLine settings
 " This stuff needs to be darker and work with cursorline
-"let g:indentLine_leadingSpaceChar = '·'
+let g:indentLine_leadingSpaceChar = '·'
 "let g:indentLine_char = '┊'
 "let g:indentLine_leadingSpaceEnabled = 1
+
+let g:gitgutter_map_keys = 0
 
 " Fix colorscheme
 hi Normal ctermbg=NONE
