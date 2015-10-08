@@ -135,12 +135,6 @@ noremap <silent> <leader>> 10<c-w>>
 noremap <silent> <leader>+ 10<c-w>+
 noremap <silent> <leader>- 10<c-w>-
 
-" Easy movement in panes
-noremap <silent> <c-h> :wincmd h<CR>
-noremap <silent> <c-j> :wincmd j<CR>
-noremap <silent> <c-k> :wincmd k<CR>
-noremap <silent> <c-l> :wincmd l<CR>
-
 nnoremap <silent> <c-Tab> :bnext<CR>
 nnoremap <silent> <c-s-Tab> :bprevious<CR>
 
@@ -156,6 +150,9 @@ function! ColorColumnToggle()
     endif
 endfunction
 noremap <expr> <leader>c ColorColumnToggle()
+
+" x to toggle a crosshairs
+nnoremap <leader>x :set cursorcolumn!<cr>
 
 " Autocomplete various braces
 inoremap {      {}<Left>
@@ -291,18 +288,12 @@ function! GoCword()
 endfunction
 nnoremap <leader>y :Unite history/yank<cr>
 nnoremap <C-p> :Unite -start-insert file_rec/async<cr>
-nnoremap <leader>ps :Unite -start-insert file_rec/async -default-action=split<cr>
-nnoremap <leader>pv :Unite -start-insert file_rec/async -default-action=vsplit<cr>
-nnoremap <leader>v <c-w>v<c-w>l
-nnoremap <leader>s <c-w>s<c-w>j
 nnoremap <leader>/ :Unite grep:.<cr>
 nnoremap <leader>a :Unite -start-insert buffer<cr>
 nnoremap <leader>t :Unite tag<cr>
 nnoremap <leader>wt :call UniteCword("tag")<cr>
 nnoremap <leader>wf :call UniteCword("file_rec/async")<cr>
 nnoremap <silent> gt :call GoCword()<cr>
-nnoremap <silent> gVt <c-w>v<c-w>l:call GoCword()<cr>
-nnoremap <silent> gSt <c-w>s<c-w>j:call GoCword()<cr>
 
 " Neosnippet options
 "imap <expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
@@ -338,8 +329,4 @@ let g:indentLine_leadingSpaceChar = '·'
 
 let g:gitgutter_map_keys = 0
 
-" Fix colorscheme
-hi Normal ctermbg=NONE
-
-nnoremap <leader>x :set cursorcolumn!<cr>
 "set background=light
