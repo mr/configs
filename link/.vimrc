@@ -12,38 +12,36 @@ set runtimepath+=~/.vim/bundle/neobundle.vim/
 
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'tsukkee/unite-tag'
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'eagletmt/neco-ghc'
-NeoBundle 'szw/vim-tags'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'michaeljsmith/vim-indent-object'
-NeoBundle 'argtextobj.vim'
-NeoBundle 'mbbill/undotree'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'Rip-Rip/clang_complete'
-NeoBundle 'godlygeek/tabular'
+NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'davidhalter/jedi-vim'
-NeoBundle 'keith/tmux.vim'
-NeoBundle 'dag/vim2hs'
-NeoBundle 'eagletmt/ghcmod-vim'
-"NeoBundle 'travitch/hasksyn'
-"NeoBundle 'raichoo/haskell-vim'
-NeoBundle 'tomasr/molokai'
-NeoBundle 'stephpy/vim-yaml'
 NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'argtextobj.vim'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'dag/vim2hs'
+NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'eagletmt/ghcmod-vim'
+NeoBundle 'eagletmt/neco-ghc'
+NeoBundle 'editorconfig/editorconfig-vim'
+NeoBundle 'godlygeek/tabular'
 NeoBundle 'kana/vim-submode'
+NeoBundle 'keith/tmux.vim'
+NeoBundle 'mbbill/undotree'
+NeoBundle 'michaeljsmith/vim-indent-object'
+NeoBundle 'ntpeters/vim-better-whitespace'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'stephpy/vim-yaml'
+NeoBundle 'szw/vim-tags'
+NeoBundle 'tomasr/molokai'
+NeoBundle 'tpope/vim-abolish'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tsukkee/unite-tag'
 
 let vimproc_updcmd = has('win64') ?
       \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
@@ -80,6 +78,8 @@ set previewheight=30
 set nofoldenable
 set foldcolumn=1
 set cursorline
+set list lcs=eol:¬,
+set showmatch
 let mapleader = " "
 
 " Colorscheme
@@ -330,7 +330,7 @@ let g:airline_theme = 'molokai'
 " This stuff needs to be darker and work with cursorline
 let g:indentLine_leadingSpaceChar = '·'
 "let g:indentLine_char = '┊'
-"let g:indentLine_leadingSpaceEnabled = 1
+let g:indentLine_leadingSpaceEnabled = 1
 
 let g:gitgutter_map_keys = 0
 

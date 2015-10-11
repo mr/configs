@@ -16,6 +16,14 @@ fi
 
 alias weechat=weechat-curses
 alias tmux="tmux -2"
+
+function findbin () {
+    if [ "$1" != "" ]; then
+        pacman -Ql $1 | grep 'bin.*[^/]$' | awk '{print $2}'
+    else
+        echo "Usage: findbin <search term>"
+    fi
+}
 bindkey -v
 function zle-line-init zle-keymap-select {
     RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
