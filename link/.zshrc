@@ -6,7 +6,7 @@ plugins=(git cabal)
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH=$HOME/.bin:$HOME/.cabal/bin:$PATH
+export PATH=$HOME/.bin:$HOME/.cabal/bin:~/.local/bin:$PATH
 
 eval $(dircolors)
 export LS_COLORS=`echo $LS_COLORS|sed 's/34\;42/94/g'`
@@ -60,3 +60,6 @@ alias tmux="tmux -2"
 alias ghist="git --no-pager log --color=always --oneline | head"
 alias ghistg="git --no-pager log --color=always --oneline --graph | head"
 alias bat="watch -n 1 'upower -i /org/freedesktop/UPower/devices/battery_BAT0'"
+
+export NVM_DIR="/home/matt/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

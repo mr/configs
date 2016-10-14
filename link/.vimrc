@@ -118,7 +118,7 @@ function! DoWindowSwap()
     exe 'hide buf' markedBuf
 endfunction
 noremap <silent> <leader>mw :call MarkWindowSwap()<CR>
-noremap <silent> <leader>pw :call DoWindowSwap()<CR>
+noremap <silent> <leader>mp :call DoWindowSwap()<CR>
 
 " Fast pane resize
 noremap <silent> <leader>< 10<c-w><
@@ -131,6 +131,12 @@ nnoremap <silent> <c-s-Tab> :bprevious<CR>
 
 " Maximize pane in new tab (preserves splits)
 nnoremap <silent> <leader>f <c-w>s<c-w>T
+
+nnoremap <silent> <leader>p :set paste!
+
+" Insert a single character in normal mode
+nnoremap <silent> s :exec "normal i".nr2char(getchar())."\e"<CR>
+nnoremap <silent> S :exec "normal a".nr2char(getchar())."\e"<CR>
 
 " Toggle colored line at column 80
 function! ColorColumnToggle()
@@ -236,13 +242,6 @@ augroup filetype_haskell
     autocmd FileType haskell let g:vim_tags_project_tags_command = "hasktags --ignore-close-implementation --ctags ."
     autocmd FileType haskell setlocal formatprg=pointfree\ --stdin
 augroup END
-
-set noshowmode
-let g:submode_timeout = 0
-call submode#enter_with('haskell', 'n', '', '<leader>h')
-call submode#map('haskell', 'n', '', 't', ':GhcModType<cr>')
-call submode#map('haskell', 'n', '', 'c', ':GhcModTypeClear<cr>')
-call submode#map('haskell', 'n', '', 's', ':GhcModCheck<cr>')
 
 " Unite options
 "
