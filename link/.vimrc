@@ -13,14 +13,13 @@ set runtimepath+=~/.vim/bundle/neobundle.vim/
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Yggdroot/indentLine'
+NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'dag/vim2hs'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'godlygeek/tabular'
-NeoBundle 'keith/tmux.vim'
 NeoBundle 'mbbill/undotree'
 NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'scrooloose/syntastic'
@@ -33,6 +32,8 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'Konfekt/FastFold'
+NeoBundle 'rust-lang/rust.vim'
+NeoBundle 'racer-rust/vim-racer'
 
 let vimproc_updcmd = has('win64') ?
       \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
@@ -132,7 +133,7 @@ nnoremap <silent> <c-s-Tab> :bprevious<CR>
 " Maximize pane in new tab (preserves splits)
 nnoremap <silent> <leader>f <c-w>s<c-w>T
 
-nnoremap <silent> <leader>p :set paste!
+nnoremap <silent> <leader>p :set paste!<CR>
 
 " Insert a single character in normal mode
 nnoremap <silent> s :exec "normal i".nr2char(getchar())."\e"<CR>
@@ -156,23 +157,10 @@ inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap {}     {}
 
-inoremap (      ()<Left>
-inoremap (<CR>  (<CR>)<Esc>O
-inoremap ()     ()
-
-inoremap [      []<Left>
-inoremap [<CR>  [<CR>]<Esc>O
-inoremap []     []
-
-inoremap "      ""<Left>
-inoremap ""     ""
-
 " Stop my color scheme from breaking Autocomplete
 highlight PmenuSel ctermbg=LightGray
 
 " Esc to clear search
-" for some reason this causes vim to start with 'c' pressed only on laptop
-"nnoremap <silent> <Esc> :let @/=''<CR>
 nnoremap <silent> <leader><leader> :let @/=''<cr>
 
 " Do stuff inside next/previous text objects
@@ -211,7 +199,7 @@ let g:neocomplete#force_omni_input_patterns.python =
 " Java
 let g:EclimCompletionMethod = 'omnifunc'
 let g:neocomplete#force_omni_input_patterns.java =
-	\ '\%(\h\w*\|)\)\.\w*'
+    \ '\%(\h\w*\|)\)\.\w*'
 let g:EclimLoggingDisabled = 1
 let g:EclimTempFilesEnable = 0
 nnoremap <silent> <leader>o :JavaImportOrganize<cr>
@@ -242,6 +230,10 @@ augroup filetype_haskell
     autocmd FileType haskell let g:vim_tags_project_tags_command = "hasktags --ignore-close-implementation --ctags ."
     autocmd FileType haskell setlocal formatprg=pointfree\ --stdin
 augroup END
+
+" Rust
+let g:racer_cmd = expand('~/.cargo/bin/racer')
+let $RUST_SRC_PATH=expand('~/workspace/rust/src')
 
 " Unite options
 "
@@ -306,12 +298,6 @@ let g:syntastic_python_checkers = ['python', 'flake8', 'pyflakes']
 " Airline settings
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'molokai'
-
-" indentLine settings
-" This stuff needs to be darker and work with cursorline
-let g:indentLine_leadingSpaceChar = '·'
-"let g:indentLine_char = '┊'
-let g:indentLine_leadingSpaceEnabled = 1
 
 let g:gitgutter_map_keys = 0
 
