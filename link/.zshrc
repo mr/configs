@@ -6,7 +6,7 @@ plugins=(git cabal)
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH=$HOME/.bin:$HOME/.cabal/bin:~/.local/bin:$PATH
+export PATH=$HOME/.bin:$HOME/.cabal/bin:~/.local/bin:$HOME/.cargo/bin:$PATH
 
 eval $(dircolors)
 export LS_COLORS=`echo $LS_COLORS|sed 's/34\;42/94/g'`
