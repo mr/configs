@@ -225,12 +225,6 @@ let g:haskell_indent_where = 4
 let g:haskell_indent_do = 4
 let g:haskell_indent_in = 0
 
-augroup filetype_haskell
-    autocmd!
-    autocmd FileType haskell let g:vim_tags_project_tags_command = "hasktags --ignore-close-implementation --ctags ."
-    autocmd FileType haskell setlocal formatprg=pointfree\ --stdin
-augroup END
-
 " Rust
 let g:racer_cmd = expand('~/.cargo/bin/racer')
 let $RUST_SRC_PATH=expand('~/workspace/rust/src')
