@@ -1,1 +1,4 @@
 *.sw[po]
+.idea/copyright
+.idea/caches
+.idea/codeStyles

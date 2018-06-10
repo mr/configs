@@ -35,6 +35,7 @@ NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'Konfekt/FastFold'
 NeoBundle 'rust-lang/rust.vim'
 NeoBundle 'racer-rust/vim-racer'
+NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --al' }
 
 let vimproc_updcmd = has('win64') ?
       \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
@@ -260,7 +261,7 @@ function! GoCword()
     execute "normal! :tag " . expand("<cword>") . "\<cr>"
 endfunction
 nnoremap <leader>y :Unite history/yank<cr>
-nnoremap <C-p> :Unite -start-insert file_rec/async<cr>
+nnoremap <C-p> :FZF<cr>
 nnoremap <leader>/ :Unite grep:.<cr>
 nnoremap <leader>a :Unite -start-insert buffer<cr>
 nnoremap <leader>t :Unite tag<cr>

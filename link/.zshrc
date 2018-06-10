@@ -60,6 +60,7 @@ alias tmux="tmux -2"
 alias ghist="git --no-pager log --color=always --oneline | head"
 alias ghistg="git --no-pager log --color=always --oneline --graph | head"
 alias bat="watch -n 1 'upower -i /org/freedesktop/UPower/devices/battery_BAT0'"
+alias note="vim -u /home/mattro/.noterc /home/mattro/Documents/notes/$(date +%m-%d-%Y)"
 
-export NVM_DIR="/home/matt/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#export NVM_DIR="/home/mattro/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
