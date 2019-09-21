@@ -1,7 +1,8 @@
-set runtimepath+=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim/
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim/
 
-call dein#begin(expand('~/.config/nvim/dein-plugins/'))
+call dein#load_state('~/.cache/dein/')
 
+call dein#begin('~/.cache/dein')
 call dein#add('Shougo/denite.nvim')
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('neomake/neomake')
@@ -24,6 +25,7 @@ call dein#add('sebastianmarkow/deoplete-rust')
 call dein#add('rust-lang/rust.vim')
 
 call dein#end()
+call dein#save_state()
 
 " Various options
 set mouse+=a
@@ -156,11 +158,12 @@ onoremap <silent> ip' :<c-u>normal! F'vi'<cr>
 
 " Deoplete options
 let g:deoplete#enable_at_startup=1
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Rust
-let g:deoplete#sources#rust#racer_binary=expand('~/.cargo/bin/racer')
-let g:deoplete#sources#rust#rust_source_path=expand('~/workspace/rust/src')
-let g:deoplete#sources#rust#documentation_max_height=20
+let g:deoplete#sources#rust#racer_binary='/home/megan/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='/home/megan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 
 " Denite options
 "
@@ -177,7 +180,7 @@ function! AgCase()
     endif
 endfunction
 
-nnoremap <C-p> :Denite -start-insert file_rec<cr>
+nnoremap <C-p> :FZF<cr>
 
 " Fugitive settings
 nnoremap <silent> <leader>gs :Gstatus<cr>
@@ -191,16 +194,12 @@ nnoremap <leader>ac :Tabularize /:<cr>
 nnoremap <leader>at :Tabularize /::<cr>
 nnoremap <leader>aa :Tabularize /-><cr>
 
-" Syntastic settings
-if isdirectory('venv')
-    let g:syntastic_python_python_exec = 'venv/bin/python'
-endif
-let g:syntastic_python_checkers = ['python', 'flake8', 'pyflakes']
-
 " Airline settings
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'molokai'
 
 let g:gitgutter_map_keys = 0
+
+call neomake#configure#automake('nrwi', 500)
 
 "set background=light

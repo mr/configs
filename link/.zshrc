@@ -1,5 +1,5 @@
 ZSH=$HOME/.oh-my-zsh
-export EDITOR=/usr/bin/vim
+export EDITOR=$(which vim)
 
 ZSH_THEME="blinks"
 plugins=(git cabal)

@@ -2,3 +2,5 @@
 .idea/copyright
 .idea/caches
 .idea/codeStyles
+.idea/kotlinc.xml
+_darcs

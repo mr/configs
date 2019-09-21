@@ -174,7 +174,7 @@ onoremap <silent> in' :<c-u>normal! f'vi'<cr>
 onoremap <silent> ip' :<c-u>normal! F'vi'<cr>
 
 " Neocomplete options
-let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 0
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#force_overwrite_completefunc = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
