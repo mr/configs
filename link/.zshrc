@@ -1,10 +1,19 @@
-ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="blinks"
-plugins=(git cabal)
-source $ZSH/oh-my-zsh.sh
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
 
 export EDITOR=$(which nvim)
-export PATH=$HOME/.bin:$HOME/.cabal/bin:~/.local/bin:$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/.cabal/bin:~/.local/bin:$HOME/.cargo/bin:$PATH
 
 eval $(dircolors)
 export LS_COLORS=`echo $LS_COLORS|sed 's/34\;42/94/g'`
@@ -23,14 +32,9 @@ function findbin () {
     fi
 }
 bindkey -v
-function zle-line-init zle-keymap-select {
-    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-    RPS2=$RPS1
-    zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
-bindkey "^?" backward-delete-char
+export KEYTIMEOUT=1
+bindkey -M vicmd '?' history-incremental-search-forward
+bindkey -M vicmd '/' history-incremental-search-backward
 
 # Most important function
 function ayy_lmao() {
@@ -54,7 +58,6 @@ function ayy_lmao() {
 }
 
 alias weechat=weechat-curses
-alias tmux="tmux -2"
 alias ghist="git --no-pager log --color=always --oneline | head"
 alias ghistg="git --no-pager log --color=always --oneline --graph | head"
 alias bat="watch -n 1 'upower -i /org/freedesktop/UPower/devices/battery_BAT0'"
@@ -64,3 +67,6 @@ alias note="vim -u /home/mattro/.noterc /home/mattro/Documents/notes/$(date +%m-
 #[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
