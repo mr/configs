@@ -1,4 +1,5 @@
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim/
+set runtimepath+=~/.fzf
 
 call dein#load_state('~/.cache/dein/')
 
@@ -23,6 +24,8 @@ call dein#add('tpope/vim-surround')
 call dein#add('vim-airline/vim-airline-themes')
 call dein#add('sebastianmarkow/deoplete-rust')
 call dein#add('rust-lang/rust.vim')
+call dein#add('kaicataldo/material.vim')
+call dein#add('hzchirs/vim-material')
 
 call dein#end()
 call dein#save_state()
@@ -52,8 +55,20 @@ let mapleader = " "
 
 " Colorscheme
 let g:solarized_termcolors=256
-colorscheme molokai
-let g:rehash256 = 1
+let g:material_terminal_italics = 1
+if (has('nvim'))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+endif
+if (has('termguicolors'))
+  set termguicolors
+endif
+" 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
+let g:material_theme_style = 'palenight'
+let g:material_style='palenight'
+"colorscheme material
+set background=dark
+colorscheme vim-material
+" let g:rehash256 = 1
 
 " Neomake configuration.
 augroup my_neomake_cmds
@@ -197,6 +212,7 @@ nnoremap <leader>aa :Tabularize /-><cr>
 " Airline settings
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'molokai'
+let g:airline_theme = 'material'
 
 let g:gitgutter_map_keys = 0
 

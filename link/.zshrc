@@ -1,11 +1,9 @@
 ZSH=$HOME/.oh-my-zsh
-export EDITOR=$(which vim)
-
 ZSH_THEME="blinks"
 plugins=(git cabal)
-
 source $ZSH/oh-my-zsh.sh
 
+export EDITOR=$(which nvim)
 export PATH=$HOME/.bin:$HOME/.cabal/bin:~/.local/bin:$HOME/.cargo/bin:$PATH
 
 eval $(dircolors)
@@ -64,3 +62,5 @@ alias note="vim -u /home/mattro/.noterc /home/mattro/Documents/notes/$(date +%m-
 
 #export NVM_DIR="/home/mattro/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

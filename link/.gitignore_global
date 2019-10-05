@@ -4,3 +4,4 @@
 .idea/codeStyles
 .idea/kotlinc.xml
 _darcs
+stack.yaml.lock

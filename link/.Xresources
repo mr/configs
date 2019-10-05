@@ -9,13 +9,13 @@ URxvt.tabbed.tabbar-fg: -2
 URxvt.tabbed.tabbar-bg: -1
 URxvt.tabbed.tab-fg:    -2
 URxvt.tabbed.tab-bg:    4
-URxvt.font: xft:Source Code Pro for Powerline:size=12
-URxvt.boldFont: xft:Source Code Pro for Powerline:size=12
+URxvt.font: xft:Source Code Pro:style=Regular:size=12
+URxvt.boldFont: xft:Source Code Pro:style=Bold:size=12
 
 XTerm*renderFont: true
 XTerm*faceName: cure-powerline
 XTerm*faceSize: 8.6
-XTerm*allowBoldFonts: false
+!XTerm*allowBoldFonts: false
 
 ! Base16 Monokai
 ! Scheme: Wimer Hazenberg (http://www.monokai.nl)

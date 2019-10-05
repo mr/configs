@@ -4,11 +4,11 @@
 
 # terminal emulator
 super + Return
-	roxterm
+	gnome-terminal
 
 # program launcher
 super + space
-	fzf-win fzf-cmd
+	rofi -show run
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -128,6 +128,9 @@ super + shift + d
 
 super + d
     scrot
+
+super + r
+    slock
 
 # multimedia
 # Pulse Audio controls
