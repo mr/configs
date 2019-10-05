@@ -12,8 +12,8 @@ fi
 
 # Customize to your needs...
 
-export EDITOR=$(which nvim)
 export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/.cabal/bin:~/.local/bin:$HOME/.cargo/bin:$PATH
+export EDITOR=$(which nvim)
 
 eval $(dircolors)
 export LS_COLORS=`echo $LS_COLORS|sed 's/34\;42/94/g'`
@@ -22,7 +22,6 @@ if [ -f "/usr/java/latest" ]; then
 fi
 
 alias weechat=weechat-curses
-alias tmux="tmux -2"
 
 function findbin () {
     if [ "$1" != "" ]; then

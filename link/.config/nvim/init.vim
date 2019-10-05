@@ -4,21 +4,13 @@ set runtimepath+=~/.fzf
 call dein#load_state('~/.cache/dein/')
 
 call dein#begin('~/.cache/dein')
-call dein#add('Shougo/denite.nvim')
 call dein#add('Shougo/deoplete.nvim')
-call dein#add('neomake/neomake')
-call dein#add('arakashic/chromatica.nvim')
 call dein#add('airblade/vim-gitgutter')
 call dein#add('altercation/vim-colors-solarized')
 call dein#add('vim-airline/vim-airline')
-call dein#add('editorconfig/editorconfig-vim')
 call dein#add('godlygeek/tabular')
 call dein#add('mbbill/undotree')
-call dein#add('ntpeters/vim-better-whitespace')
-call dein#add('szw/vim-tags')
 call dein#add('tomasr/molokai')
-call dein#add('tpope/vim-abolish')
-call dein#add('tpope/vim-fugitive')
 call dein#add('tpope/vim-repeat')
 call dein#add('tpope/vim-surround')
 call dein#add('vim-airline/vim-airline-themes')
@@ -26,6 +18,10 @@ call dein#add('sebastianmarkow/deoplete-rust')
 call dein#add('rust-lang/rust.vim')
 call dein#add('kaicataldo/material.vim')
 call dein#add('hzchirs/vim-material')
+call dein#add('junegunn/fzf.vim')
+call dein#add('neoclide/coc.nvim', {'merge':0, 'rev': 'release'})
+call dein#add('neovimhaskell/haskell-vim')
+call dein#add('ntpeters/vim-better-whitespace')
 
 call dein#end()
 call dein#save_state()
@@ -49,7 +45,7 @@ set previewheight=30
 set nofoldenable
 set foldcolumn=1
 set cursorline
-set list lcs=eol:¬,
+set list lcs=eol:¬,space:.,
 set showmatch
 let mapleader = " "
 
@@ -68,15 +64,6 @@ let g:material_style='palenight'
 "colorscheme material
 set background=dark
 colorscheme vim-material
-" let g:rehash256 = 1
-
-" Neomake configuration.
-augroup my_neomake_cmds
-    autocmd!
-    autocmd BufWritePost * Neomake
-    " Have neomake run cargo when Rust files are saved.
-    autocmd BufWritePost *.rs Neomake! cargo
-augroup END
 
 " Filetype autocommands
 augroup filetype_xml
@@ -130,14 +117,14 @@ nnoremap <silent> <c-Tab> :bnext<CR>
 nnoremap <silent> <c-s-Tab> :bprevious<CR>
 
 " Maximize pane in new tab (preserves splits)
-nnoremap <silent> <leader>f <c-w>s<c-w>T
+nnoremap <silent> <leader>t <c-w>s<c-w>T
 
 " Toggle paste
 nnoremap <silent> <leader>p :set paste!<CR>
 
 " Insert a single character in normal mode
-nnoremap <silent> s :exec "normal i".nr2char(getchar())."\e"<CR>
-nnoremap <silent> S :exec "normal a".nr2char(getchar())."\e"<CR>
+nnoremap <silent> <leader>s :exec "normal i".nr2char(getchar())."\e"<CR>
+nnoremap <silent> <leader>S :exec "normal a".nr2char(getchar())."\e"<CR>
 
 " Toggle colored line at column 80
 function! ColorColumnToggle()
@@ -158,50 +145,162 @@ inoremap {<CR>  {<CR>}<Esc>O
 inoremap {}     {}
 
 " Stop my color scheme from breaking Autocomplete
-highlight PmenuSel ctermbg=LightGray
+"highlight PmenuSel ctermbg=LightGray
 
 " Esc to clear search
 nnoremap <silent> <leader><leader> :let @/=''<cr>
 
-" Do stuff inside next/previous text objects
-onoremap <silent> in( :<c-u>normal! f(vi(<cr>
-onoremap <silent> ip( :<c-u>normal! F)vi(<cr>
-onoremap <silent> in" :<c-u>normal! f"vi"<cr>
-onoremap <silent> ip" :<c-u>normal! F"vi"<cr>
-onoremap <silent> in' :<c-u>normal! f'vi'<cr>
-onoremap <silent> ip' :<c-u>normal! F'vi'<cr>
-
 " Deoplete options
-let g:deoplete#enable_at_startup=1
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Don't enable with CoC
+let g:deoplete#enable_at_startup=0
+
+" CoC
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>qc  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <C-r> <Plug>(coc-range-select)
+xmap <silent> <C-r> <Plug>(coc-range-select)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Rust
 let g:deoplete#sources#rust#racer_binary='/home/megan/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path='/home/megan/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 
-" Denite options
-"
-" This function sets ag's case based on smartcase setting
-" g:unite_source_grep_default_opts must be set again after changing
-" smartcase or ignorecase :(
-function! AgCase()
-    if &g:smartcase && &g:ignorecase
-        return '--smart-case '
-    elseif &g:ignorecase
-        return '--ignore-case '
-    else
-        return ''
-    endif
-endfunction
+" Haskell
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 
+" fzf
 nnoremap <C-p> :FZF<cr>
-
-" Fugitive settings
-nnoremap <silent> <leader>gs :Gstatus<cr>
-nnoremap <silent> <leader>gc :Gcommit<cr>
-nnoremap <silent> <leader>gd :Gdiff<cr>
-nnoremap <silent> <leader>gp :Git push origin master<cr>
+nnoremap <leader>/ :Rg
+nnoremap <leader>b :Buffers<cr>
 
 " Tabular settings
 nnoremap <leader>ae :Tabularize /=<cr>
@@ -215,7 +314,3 @@ let g:airline_theme = 'molokai'
 let g:airline_theme = 'material'
 
 let g:gitgutter_map_keys = 0
-
-call neomake#configure#automake('nrwi', 500)
-
-"set background=light
