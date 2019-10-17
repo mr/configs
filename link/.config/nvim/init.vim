@@ -6,22 +6,19 @@ call dein#load_state('~/.cache/dein/')
 call dein#begin('~/.cache/dein')
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('airblade/vim-gitgutter')
-call dein#add('altercation/vim-colors-solarized')
 call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes')
 call dein#add('godlygeek/tabular')
 call dein#add('mbbill/undotree')
-call dein#add('tomasr/molokai')
 call dein#add('tpope/vim-repeat')
 call dein#add('tpope/vim-surround')
-call dein#add('vim-airline/vim-airline-themes')
 call dein#add('sebastianmarkow/deoplete-rust')
 call dein#add('rust-lang/rust.vim')
-call dein#add('kaicataldo/material.vim')
-call dein#add('hzchirs/vim-material')
 call dein#add('junegunn/fzf.vim')
 call dein#add('neoclide/coc.nvim', {'merge':0, 'rev': 'release'})
 call dein#add('neovimhaskell/haskell-vim')
 call dein#add('ntpeters/vim-better-whitespace')
+call dein#add('chriskempson/base16-vim')
 
 call dein#end()
 call dein#save_state()
@@ -50,20 +47,10 @@ set showmatch
 let mapleader = " "
 
 " Colorscheme
-let g:solarized_termcolors=256
-let g:material_terminal_italics = 1
-if (has('nvim'))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-endif
 if (has('termguicolors'))
   set termguicolors
 endif
-" 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
-let g:material_theme_style = 'palenight'
-let g:material_style='palenight'
-"colorscheme material
-set background=dark
-colorscheme vim-material
+colorscheme base16-material-darker
 
 " Filetype autocommands
 augroup filetype_xml
@@ -148,7 +135,7 @@ inoremap {}     {}
 "highlight PmenuSel ctermbg=LightGray
 
 " Esc to clear search
-nnoremap <silent> <leader><leader> :let @/=''<cr>
+nnoremap <silent> <esc> :noh<cr>
 
 " Deoplete options
 " Don't enable with CoC
@@ -161,9 +148,6 @@ set hidden
 " Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
-
-" Better display for messages
-set cmdheight=2
 
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
@@ -250,9 +234,9 @@ xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
-" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <C-r> <Plug>(coc-range-select)
-xmap <silent> <C-r> <Plug>(coc-range-select)
+" Use <leader>rs for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <leader>rs <Plug>(coc-range-select)
+xmap <silent> <leader>rs <Plug>(coc-range-select)
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
@@ -268,21 +252,21 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <leader>ea  :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <leader>ee  :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <leader>ec  :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <leader>eo  :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <leader>es  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent> <leader>ej  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent> <leader>ek  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent> <leader>ep  :<C-u>CocListResume<CR>
 
 " Rust
 let g:deoplete#sources#rust#racer_binary='/home/megan/.cargo/bin/racer'
@@ -301,6 +285,7 @@ let g:haskell_backpack = 1                " to enable highlighting of backpack k
 nnoremap <C-p> :FZF<cr>
 nnoremap <leader>/ :Rg
 nnoremap <leader>b :Buffers<cr>
+nnoremap <leader><leader> :b#<cr>
 
 " Tabular settings
 nnoremap <leader>ae :Tabularize /=<cr>
@@ -311,6 +296,5 @@ nnoremap <leader>aa :Tabularize /-><cr>
 " Airline settings
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'molokai'
-let g:airline_theme = 'material'
 
 let g:gitgutter_map_keys = 0
