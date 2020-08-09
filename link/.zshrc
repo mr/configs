@@ -14,6 +14,7 @@ fi
 
 export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/.cabal/bin:~/.local/bin:$HOME/.cargo/bin:$PATH
 export EDITOR=$(which nvim)
+export SUDO_EDITOR=$(which nvim)
 
 eval $(dircolors)
 export LS_COLORS=`echo $LS_COLORS|sed 's/34\;42/94/g'`

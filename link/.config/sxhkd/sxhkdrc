@@ -124,7 +124,8 @@ super + p
 	kupfer
 
 super + shift + d
-    sleep 0.2 && scrot -s
+    screenshot
+#sleep 0.2 && scrot -s
 
 super + d
     scrot

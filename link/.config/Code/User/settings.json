@@ -1,0 +1,47 @@
+{
+    "workbench.colorTheme": "Ayu Dark Bordered",
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/node_modules/*/**": true
+    },
+    "editor.fontFamily": "'Operator Mono Lig', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontLigatures": true,
+    "editor.cursorSmoothCaretAnimation": true,
+    "csharp.semanticHighlighting.enabled": true,
+    "editor.semanticHighlighting.enabled": true,
+    "editor.semanticTokenColorCustomizations": {
+      "[One Monokai Italics]": {
+        "enabled": true,
+        "rules": {
+          "plainKeyword": { "italic": true }
+        }
+      },
+      "[Dracula]": {
+        "enabled": true,
+        "rules": {
+          "plainKeyword": { "italic": true },
+          "controlKeyword": { "italic": true },
+          "comment": { "italic": true }
+        }
+      },
+      "[Ayu Dark Bordered]": {
+        "enabled": true,
+        "rules": {
+          "plainKeyword": { "italic": true },
+          "controlKeyword": { "italic": true },
+          "comment": { "italic": true }
+        }
+      },
+    },
+    "editor.renderWhitespace": "all",
+    "editor.rulers": [
+      120
+    ],
+    "editor.fontSize": 16,
+    "haskell.enable": true,
+    "haskell.languageServerVariant": "haskell-ide-engine",
+    "window.menuBarVisibility": "toggle",
+    "editor.smoothScrolling": true,
+    "workbench.iconTheme": "Monokai Classic Icons"
+}

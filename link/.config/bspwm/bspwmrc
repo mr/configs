@@ -4,7 +4,10 @@ sxhkd &
 compton &
 xcape
 
-bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor DP-1 -d I II
+bspc monitor DVI-D-0 -d III IV V
+bspc monitor DP-5 -d VI VII
+bspc monitor HDMI-0 -d VIII IX X
 
 bspc config border_width         2
 bspc config window_gap           20
