@@ -1,8 +1,9 @@
 #!/usr/bin/sh
 
 sxhkd &
-compton &
+#compton &
 xcape
+picom &
 
 bspc monitor DP-1 -d I II
 bspc monitor DVI-D-0 -d III IV V
