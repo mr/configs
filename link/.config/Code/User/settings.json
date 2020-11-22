@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Ayu Dark Bordered",
+    "workbench.colorTheme": "Ayu Dark",
     "files.watcherExclude": {
       "**/.git/objects/**": true,
       "**/.git/subtree-cache/**": true,
@@ -38,10 +38,10 @@
     "editor.rulers": [
       120
     ],
-    "editor.fontSize": 16,
+    "editor.fontSize": 23,
     "haskell.enable": true,
     "haskell.languageServerVariant": "haskell-ide-engine",
     "window.menuBarVisibility": "toggle",
     "editor.smoothScrolling": true,
-    "workbench.iconTheme": "Monokai Classic Icons"
+    "workbench.iconTheme": "material-icon-theme"
 }

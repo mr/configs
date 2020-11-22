@@ -120,9 +120,6 @@ super + alt + shift + {h,j,k,l}
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
-super + p
-	kupfer
-
 super + shift + d
     screenshot
 #sleep 0.2 && scrot -s
@@ -132,6 +129,9 @@ super + d
 
 super + r
     slock
+
+super + alt + p
+    picom
 
 # multimedia
 # Pulse Audio controls

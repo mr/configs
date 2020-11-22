@@ -15,6 +15,8 @@ URxvt.boldFont: xft:Source Code Pro:style=Bold:size=12
 XTerm*renderFont: true
 XTerm*faceName: cure-powerline
 XTerm*faceSize: 8.6
+
+Xft.dpi: 144
 !XTerm*allowBoldFonts: false
 
 ! Base16 Monokai
